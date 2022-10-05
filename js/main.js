@@ -1,25 +1,19 @@
-function getRandomIntInclusive(min, max) {
-  if (min >= max) {
+function getRandomIntInclusive(a, b) {
+  if (a >= b) {
     return 'Данные на входе не корректны';
-  } else if (!Number(min || max) || (min || max) < 0) {
+  } else if (!Number(a || b) || (a || b) < 0) {
     return NaN;
   }
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.round(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
+  const min = Math.ceil(a);
+  const max = Math.floor(b);
+  return Math.round(Math.random() * (max - min + 1)) + min;
 }
 
 getRandomIntInclusive(7, 5);
 
 
-function maxLenght(string, maxString) {
-  string = string.lenght;
-  if (+string > maxString) {
-    return false;
-  }
-  return true;
+function checkStringLenght(string, maxString) {
+  return string.lenght <= maxString;
 }
 
-const test = 'jhgjhgjhgjhgjhgjhgjhgjhgjhgjhgj';
-
-console.log(maxLenght(test, 12));
+checkStringLenght('test', 12);
