@@ -7,6 +7,9 @@ const getRandomIntInclusive = (a, b) => {
   const max = Math.floor(b);
 
   return Math.round(Math.random() * (max - min + 1)) + min;
+
+  // вариант с тернарным оператором.
+  // return (!Number(a || b) || (a || b) < 0 || a >= b) ? NaN : Math.round(Math.random() * (max - min + 1)) + min;
 };
 
 getRandomIntInclusive(7, 5);
