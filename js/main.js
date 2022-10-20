@@ -52,7 +52,7 @@ const SET_MESSAGES = `Всё отлично!
 const getArray = (stringToArray, separator) => stringToArray.split(separator);
 
 // Переменная - счетчик.
-const countId = 0;
+let countId = 0;
 
 // Основная функция - создает объект для массива описания фото.
 const createArrayDescription = () => {
@@ -73,9 +73,10 @@ const createArrayDescription = () => {
   const randomDescription = getRandomIntInclusive(0, getArray(SET_DESCRIPTION, (/[\n]/)).length - 1);
   const commentsArray = Array.from({ length: [getRandomIntInclusive(1, 6)] }, createComment);
 
+  countId += 1;
   return {
-    id: countId + 1,
-    url: `photos/${countId + 1}.jpg`,
+    id: countId,
+    url: `photos/${countId}.jpg`,
     description: getArray(SET_DESCRIPTION, (/[\n]/))[randomDescription],
     likes: getRandomIntInclusive(15, 200),
     comments: commentsArray,
@@ -84,4 +85,4 @@ const createArrayDescription = () => {
 
 const massiveNumbers = Array.from({ length: 25 }, createArrayDescription);
 
-massiveNumbers();
+console.log(massiveNumbers);
