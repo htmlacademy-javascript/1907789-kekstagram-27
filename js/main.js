@@ -85,4 +85,4 @@ const createArrayDescription = () => {
 
 const massiveNumbers = Array.from({ length: 25 }, createArrayDescription);
 
-console.log(massiveNumbers);
+massiveNumbers();
