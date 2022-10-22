@@ -13,7 +13,14 @@ const checkStringLength = (string, maxString) => string.length <= maxString;
 
 checkStringLength(1,3);
 
-// Набор строк для описания фотографии.
+const SIMILAR_DESCRIPTION_COUNT = 25;
+const LIKES_COUNT_MIN = 15;
+const LIKES_COUNT_MAX = 200;
+const AVATAR_COUNT = 6;
+const COMMENTS_COUNT = 10;
+
+
+// Массив строк для описания фотографии.
 const DESCRIPTION = [
   'Каждый день сделайте своим шедевром. Джон Вуден',
   'Лучшая месть – огромный успех. Фрэнк Синатра',
@@ -44,7 +51,7 @@ const NAMES = [
   'Тыква',
 ];
 
-// Сообщения для comments.
+// Массив сообщений для comments.
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -54,36 +61,30 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-// Переменная - счетчик.
-let countId = 0;
+const randomElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
+
+// Создаёт один объект для массива комментариев
+const createComment = () => ({
+  id: getRandomIntInclusive(1, SIMILAR_DESCRIPTION_COUNT),
+  avatar: `img/avatar-${getRandomIntInclusive(1, AVATAR_COUNT - 1)}.svg`,
+  message: randomElement(MESSAGES),
+  name: randomElement(NAMES),
+});
 
 // Основная функция - создает объект для массива описания фото.
-const createArrayDescription = () => {
+const createDescriptionPhoto = (index) => {
+  // Создает массив комментариев
+  const getComments = Array.from({ length: [getRandomIntInclusive(1, COMMENTS_COUNT)] }, createComment);
 
-  // Создаёт объект для массива коменнтариев
-  const createComment = () => {
-    const randomNameIndex = getRandomIntInclusive(0, NAMES.length - 1);
-
-    return {
-      id: getRandomIntInclusive(15, 200),
-      avatar: `img/avatar-${getRandomIntInclusive(1, 6)}.svg`,
-      message: MESSAGES[getRandomIntInclusive(0, MESSAGES.length - 1)],
-      name: NAMES[randomNameIndex],
-    };
-  };
-
-  const commentsArray = Array.from({ length: [getRandomIntInclusive(1, 6)] }, createComment);
-
-  countId += 1;
   return {
-    id: countId,
-    url: `photos/${countId}.jpg`,
-    description: DESCRIPTION[getRandomIntInclusive(0, DESCRIPTION.length - 1)],
-    likes: getRandomIntInclusive(15, 200),
-    comments: commentsArray,
+    id: index,
+    url: `photos/${index}.jpg`,
+    description: randomElement(DESCRIPTION),
+    likes: getRandomIntInclusive(LIKES_COUNT_MIN, LIKES_COUNT_MAX),
+    comments: getComments,
   };
 };
 
-const massiveNumbers = Array.from({ length: 25 }, createArrayDescription);
+const getDescription = () => Array.from({length: SIMILAR_DESCRIPTION_COUNT}, (_, pindex) => createDescriptionPhoto(pindex + 1));
 
-console.log(massiveNumbers);
+getDescription();
