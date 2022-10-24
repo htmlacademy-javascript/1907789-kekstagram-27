@@ -1,24 +1,8 @@
-const getRandomIntInclusive = (a, b) => {
-  if (!Number(a || b) || (a || b) < 0 || a >= b) {
-    return NaN;
-  }
-
-  const min = Math.ceil(a);
-  const max = Math.floor(b);
-
-  return Math.round(Math.random() * (max - min + 1)) + min;
-};
-
-const checkStringLength = (string, maxString) => string.length <= maxString;
-
-checkStringLength(1,3);
-
 const SIMILAR_DESCRIPTION_COUNT = 25;
 const LIKES_COUNT_MIN = 15;
 const LIKES_COUNT_MAX = 200;
 const AVATAR_COUNT = 6;
 const COMMENTS_COUNT = 10;
-
 
 // Массив строк для описания фотографии.
 const DESCRIPTION = [
@@ -35,7 +19,8 @@ const DESCRIPTION = [
   'Я не знаю, что является ключом к успеху, но ключ к неудаче — это желание всем угодить. Билл Косби',
   'Одной лишь мотивации недостаточно. Если взять идиота и мотивировать его, получится мотивированный идиот. Джим Рон',
   'Если сейчас у тебя нет ничего из того, о чём ты мечтал — пора поставить себе цели и добиваться их. Омар Хайям',
-  'Кто может, тот делает, кто не может, тот критикует. Чак Паланик'];
+  'Кто может, тот делает, кто не может, тот критикует. Чак Паланик'
+];
 
 // Массив случайных имён.
 const NAMES = [
@@ -61,30 +46,45 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const randomElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
+const getRandomIntInclusive = (a, b) => {
+  if (!Number(a || b) || (a || b) < 0 || a >= b) {
+    return NaN;
+  }
+
+  const min = Math.ceil(a);
+  const max = Math.floor(b);
+
+  return Math.round(Math.random() * (max - min + 1)) + min;
+};
+
+const checkStringLength = (string, maxString) => string.length <= maxString;
+
+checkStringLength(1,3);
+
+const getRandomElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 
 // Создаёт один объект для массива комментариев
-const createComment = () => ({
-  id: getRandomIntInclusive(1, SIMILAR_DESCRIPTION_COUNT),
+const createComment = (id) => ({
+  id,
   avatar: `img/avatar-${getRandomIntInclusive(1, AVATAR_COUNT - 1)}.svg`,
-  message: randomElement(MESSAGES),
-  name: randomElement(NAMES),
+  message: getRandomElement(MESSAGES),
+  name: getRandomElement(NAMES),
 });
 
 // Основная функция - создает объект для массива описания фото.
-const createDescriptionPhoto = (index) => {
+const createPhotoDescription = (id) => {
   // Создает массив комментариев
-  const getComments = Array.from({ length: [getRandomIntInclusive(1, COMMENTS_COUNT)] }, createComment);
+  const сomments = Array.from({ length: [getRandomIntInclusive(1, COMMENTS_COUNT)] }, (_, commentId) => createComment(commentId + 1));
 
   return {
-    id: index,
-    url: `photos/${index}.jpg`,
-    description: randomElement(DESCRIPTION),
+    id: id,
+    url: `photos/${id}.jpg`,
+    description: getRandomElement(DESCRIPTION),
     likes: getRandomIntInclusive(LIKES_COUNT_MIN, LIKES_COUNT_MAX),
-    comments: getComments,
+    comments: сomments,
   };
 };
 
-const getDescription = () => Array.from({length: SIMILAR_DESCRIPTION_COUNT}, (_, pindex) => createDescriptionPhoto(pindex + 1));
+const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
 
-getDescription();
+console.log(getPhotosDescription(SIMILAR_DESCRIPTION_COUNT));
