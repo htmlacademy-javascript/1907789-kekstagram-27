@@ -87,4 +87,4 @@ const createPhotoDescription = (id) => {
 
 const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
 
-console.log(getPhotosDescription(SIMILAR_DESCRIPTION_COUNT));
+getPhotosDescription(SIMILAR_DESCRIPTION_COUNT);
