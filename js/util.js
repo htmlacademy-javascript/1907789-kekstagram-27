@@ -1,4 +1,4 @@
-const getRandomIntInclusive = (a, b) => {
+export const getRandomIntInclusive = (a, b) => {
   if (!Number(a || b) || (a || b) < 0 || a >= b) {
     return NaN;
   }
@@ -13,9 +13,4 @@ const checkStringLength = (string, maxString) => string.length <= maxString;
 
 checkStringLength(1,2);
 
-const getRandomElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
-
-export {
-  getRandomIntInclusive,
-  getRandomElement,
-};
+export const getRandomElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
