@@ -69,7 +69,7 @@ const createPhotoDescription = (id) => {
     url: `photos/${id}.jpg`,
     description: getRandomElement(DESCRIPTION),
     likes: getRandomIntInclusive(LIKES_COUNT_MIN, LIKES_COUNT_MAX),
-    comments: сomments,
+    сomments,
   };
 };
 
