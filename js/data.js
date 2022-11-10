@@ -73,6 +73,6 @@ const createPhotoDescription = (id) => {
   };
 };
 
-const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
+export const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
 
 getPhotosDescription(SIMILAR_DESCRIPTION_COUNT);
