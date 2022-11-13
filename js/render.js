@@ -3,22 +3,29 @@ import {
 } from './data.js';
 
 const picturesContainer = document.querySelector('.pictures');
-const randomUserPictureTemplate = document.querySelector('#picture')
+const pictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
+
 const picturesFragment = document.createDocumentFragment();
 
 
-const createPictures = (picturesData) => {
-  picturesData.forEach(({url, likes, comments, description}) => {
-    const picture = randomUserPictureTemplate.cloneNode(true);
-    picture.querySelector('.picture__img').src = url;
-    picture.querySelector('.picture__img').alt = description;
-    picture.querySelector('.picture__comments').textContent = comments;
-    picture.querySelector('.picture__likes').textContent = likes;
-    picturesFragment.append(picture);
+const createPicture = (picture) => {
+  const element = pictureTemplate.cloneNode(true);
+  element.querySelector('.picture__img').src = picture.url;
+  element.querySelector('.picture__img').alt = picture.description;
+  element.querySelector('.picture__comments').textContent = picture.comments;
+  element.querySelector('.picture__likes').textContent = picture.likes;
+
+  picturesFragment.append(element);
+};
+
+const renderPhotos = (pictures) => {
+  pictures.forEach((picture) => {
+    createPicture(picture);
   });
+
   picturesContainer.append(picturesFragment);
 };
 
-createPictures(getPhotosDescription(5));
+renderPhotos(getPhotosDescription(25));
