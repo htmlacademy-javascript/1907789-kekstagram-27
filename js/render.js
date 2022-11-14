@@ -8,9 +8,6 @@ const pictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const picturesFragment = document.createDocumentFragment();
-
-
 const createPicture = (picture) => {
   const element = pictureTemplate.cloneNode(true);
   element.querySelector('.picture__img').src = picture.url;
@@ -18,15 +15,14 @@ const createPicture = (picture) => {
   element.querySelector('.picture__comments').textContent = picture.comments;
   element.querySelector('.picture__likes').textContent = picture.likes;
 
-  picturesFragment.append(element);
+  return element;
 };
 
 const renderPhotos = (pictures) => {
   pictures.forEach((picture) => {
-    createPicture(picture);
+    const picturesFragment = createPicture(picture);
+    picturesContainer.append(picturesFragment);
   });
-
-  picturesContainer.append(picturesFragment);
 };
 
 renderPhotos(getPhotosDescription(SIMILAR_DESCRIPTION_COUNT));
