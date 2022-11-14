@@ -3,7 +3,7 @@ import {
   getRandomElement,
 } from './util.js';
 
-const SIMILAR_DESCRIPTION_COUNT = 25;
+export const SIMILAR_DESCRIPTION_COUNT = 25;
 const LIKES_COUNT_MIN = 15;
 const LIKES_COUNT_MAX = 200;
 const AVATAR_COUNT = 6;
@@ -73,6 +73,4 @@ const createPhotoDescription = (id) => {
   };
 };
 
-const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
-
-getPhotosDescription(SIMILAR_DESCRIPTION_COUNT);
+export const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
