@@ -1,5 +1,6 @@
 import {
   getPhotosDescription,
+  SIMILAR_DESCRIPTION_COUNT,
 } from './data.js';
 
 const picturesContainer = document.querySelector('.pictures');
@@ -28,4 +29,4 @@ const renderPhotos = (pictures) => {
   picturesContainer.append(picturesFragment);
 };
 
-renderPhotos(getPhotosDescription(25));
+renderPhotos(getPhotosDescription(SIMILAR_DESCRIPTION_COUNT));
