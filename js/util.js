@@ -14,3 +14,5 @@ const checkStringLength = (string, maxString) => string.length <= maxString;
 checkStringLength(1,2);
 
 export const getRandomElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
+
+export const isEscapeKey = (evt) => evt.key === 'Escape';
