@@ -1,4 +1,5 @@
 import {
+  createPicture,
   picturesContainer,
 } from './render.js';
 import {
@@ -9,6 +10,7 @@ const bigPictureContainer = document.querySelector('.big-picture');
 const bigPicture = bigPictureContainer.querySelector('img');
 
 const allThumbnails = document.querySelectorAll('.picture');
+console.log(allThumbnails);
 
 const bigPictureLikes = document.querySelector('.likes-count');
 const bigPictureCommentsCount = document.querySelector('.comments-count');
@@ -48,11 +50,8 @@ const openModal = () => {
 picturesContainer.addEventListener('click', (evt) => {
   if(evt.target.nodeName === 'IMG') {
     openModal();
+    for (let i = 0; i < allThumbnails.length; i++) {
+      addThumbnailClickHandler(picturesContainer[i]);
+    }
   }
 });
-
-
-// for (let i = 0; i < allThumbnails.length; i++) {
-
-//   addThumbnailClickHandler(allThumbnails[i], renderPhotos[i]);
-// }
