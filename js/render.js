@@ -30,4 +30,6 @@ export const renderPhotos = (pictures) => {
   return picturesContainer.append(picturesFragment);
 };
 
+
 renderPhotos(getPhotosDescription(SIMILAR_DESCRIPTION_COUNT));
+

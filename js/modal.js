@@ -1,5 +1,4 @@
 import {
-  // renderPhotos,
   picturesContainer,
 } from './render.js';
 import {
@@ -21,39 +20,37 @@ const newCommentsLoader = document.querySelector('.comments-loader');
 const body = document.querySelector('body');
 
 
-// export const addThumbnailClickHandler = (thumbnail, photo) => {
-//   thumbnail.addEventListener('click', () => {
-//     bigPicture.src = photo.url;
-//     bigPictureLikes.textContent = photo.likes;
-//     bigPictureCommentsCount.textContent = photo.comments.length;
-//     bigPictureDescription.textContent = photo.description;
+export const addThumbnailClickHandler = (photo) => {
+  bigPicture.src = photo.url;
+  bigPictureLikes.textContent = photo.likes;
+  bigPictureCommentsCount.textContent = photo.comments;
+  bigPictureDescription.textContent = photo.description;
 
-//     // updateComments(photo.comments);
+  // updateComments(photo.comments);
 
-//     bigPictureContainer.classList.remove('hidden');
-//     commentsCount.classList.add('hidden');
-//     newCommentsLoader.classList.add('hidden');
-//     body.classList.add('modal-open');
-//   });
-// };
+  bigPictureContainer.classList.remove('hidden');
+  commentsCount.classList.add('hidden');
+  newCommentsLoader.classList.add('hidden');
+  body.classList.add('modal-open');
+};
 
 const openModal = () => {
   bigPictureContainer.classList.remove('hidden');
 
-  // document.addEventListener('keydown', (evt) => {
-  //   if (isEscapeKey(evt)) {
-  //     evt.preventDefault();
-  //     bigPictureContainer.classList.add('hidden');
-  //   }
-  // });
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      bigPictureContainer.classList.add('hidden');
+    }
+  });
 };
 
-
-picturesContainer.onClick = (evt) => {
-  if (evt.target.nodeName === 'img') {
-    bigPictureContainer.classList.remove('hidden');
+picturesContainer.addEventListener('click', (evt) => {
+  if(evt.target.nodeName === 'IMG') {
+    openModal();
   }
-};
+});
+
 
 // for (let i = 0; i < allThumbnails.length; i++) {
 
