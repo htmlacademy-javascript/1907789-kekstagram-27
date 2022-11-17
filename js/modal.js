@@ -1,20 +1,8 @@
 import {
-  createPicture,
-  picturesContainer,
-} from './render.js';
-import {
   isEscapeKey,
 } from './util.js';
 
 const bigPictureContainer = document.querySelector('.big-picture');
-const bigPicture = bigPictureContainer.querySelector('img');
-
-const allThumbnails = document.querySelectorAll('.picture');
-console.log(allThumbnails);
-
-const bigPictureLikes = document.querySelector('.likes-count');
-const bigPictureCommentsCount = document.querySelector('.comments-count');
-const bigPictureDescription = document.querySelector('.social__caption');
 
 const commentsCount = document.querySelector('.social__comment-count');
 const newCommentsLoader = document.querySelector('.comments-loader');
@@ -22,13 +10,11 @@ const newCommentsLoader = document.querySelector('.comments-loader');
 const body = document.querySelector('body');
 
 
-export const addThumbnailClickHandler = (photo) => {
-  bigPicture.src = photo.url;
-  bigPictureLikes.textContent = photo.likes;
-  bigPictureCommentsCount.textContent = photo.comments;
-  bigPictureDescription.textContent = photo.description;
-
-  // updateComments(photo.comments);
+export const createBigPicture = (photo) => {
+  bigPictureContainer.querySelector('.big-picture__img img').src = photo.url;
+  bigPictureContainer.querySelector('.big-picture__img img').alt = photo.description;
+  bigPictureContainer.querySelector('.social__caption').textContent = photo.description;
+  bigPictureContainer.querySelector('.likes-count').textContent = photo.likes;
 
   bigPictureContainer.classList.remove('hidden');
   commentsCount.classList.add('hidden');
@@ -36,8 +22,9 @@ export const addThumbnailClickHandler = (photo) => {
   body.classList.add('modal-open');
 };
 
-const openModal = () => {
+export const openModal = (picture) => {
   bigPictureContainer.classList.remove('hidden');
+  createBigPicture(picture);
 
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
@@ -47,11 +34,9 @@ const openModal = () => {
   });
 };
 
-picturesContainer.addEventListener('click', (evt) => {
-  if(evt.target.nodeName === 'IMG') {
-    openModal();
-    for (let i = 0; i < allThumbnails.length; i++) {
-      addThumbnailClickHandler(picturesContainer[i]);
-    }
-  }
-});
+// picturesContainer.addEventListener('click', (evt) => {
+//   if(evt.target.nodeName === 'IMG') {
+//     openModal();
+//     const element = evt.target;
+//   }
+// });
