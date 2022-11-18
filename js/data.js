@@ -74,3 +74,5 @@ const createPhotoDescription = (id) => {
 };
 
 export const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
+
+console.log(getPhotosDescription(25));
