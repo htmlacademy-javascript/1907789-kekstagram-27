@@ -65,7 +65,7 @@ const createPhotoDescription = (id) => {
   const сomments = Array.from({ length: [getRandomIntInclusive(1, COMMENTS_COUNT)] }, (_, commentId) => createComment(commentId + 1));
 
   return {
-    id: id,
+    id,
     url: `photos/${id}.jpg`,
     description: getRandomElement(DESCRIPTION),
     likes: getRandomIntInclusive(LIKES_COUNT_MIN, LIKES_COUNT_MAX),
@@ -74,5 +74,3 @@ const createPhotoDescription = (id) => {
 };
 
 export const getPhotosDescription = (quantity) => Array.from({length: quantity}, (_, id) => createPhotoDescription(id + 1));
-
-console.log(getPhotosDescription(25));

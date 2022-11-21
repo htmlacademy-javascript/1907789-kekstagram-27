@@ -35,21 +35,24 @@ export const createBigPicture = (photo) => {
   body.classList.add('modal-open');
 };
 
-export const openModal = (picture) => {
-  bigPictureContainer.classList.remove('hidden');
-  createBigPicture(picture);
+const updateComment = (comments) => {
   const commentFragment = document.createDocumentFragment();
   const socialComments = bigPictureContainer.querySelector('.social__comments');
   socialComments.innerHTML = '';
-  const comments = picture.comments
 
-  comments.forEach((data) => {
+  comments.forEach((comment) => {
     const element = commentTemplate.cloneNode(true);
-    element.querySelector('.social__picture').src = data.avatar;
-    element.querySelector('.social__text').textContent = data.message;
-    element.querySelector('.social__picture').alt = data.name;
+    element.querySelector('.social__picture').src = comment.avatar;
+    element.querySelector('.social__text').textContent = comment.message;
+    element.querySelector('.social__picture').alt = comment.name;
     commentFragment.append(element);
   });
+};
+
+export const openModal = (picture) => {
+  bigPictureContainer.classList.remove('hidden');
+  createBigPicture(picture);
+  updateComment(picture.comments);
 
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
