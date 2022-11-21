@@ -63,7 +63,7 @@ const createComment = (id) => ({
 const createPhotoDescription = (id) => {
   // Создает массив комментариев
   const сomments = Array.from({ length: [getRandomIntInclusive(1, COMMENTS_COUNT)] }, (_, commentId) => createComment(commentId + 1));
-
+  console.log(typeof(comments));
   return {
     id,
     url: `photos/${id}.jpg`,
