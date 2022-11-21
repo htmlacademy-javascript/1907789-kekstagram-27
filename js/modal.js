@@ -13,16 +13,6 @@ const newCommentsLoader = document.querySelector('.comments-loader');
 
 const body = document.querySelector('body');
 
-// const createComment = (data) => {
-//   const element = commentTemplate.cloneNode(true);
-
-//   commentsContainer.querySelector('img').src = data.avatar;
-//   commentsContainer.querySelector('img').alt = data.name;
-//   commentsContainer.querySelector('social__text').textContent = data.message;
-
-//   return element;
-// };
-
 export const createBigPicture = (photo) => {
   bigPictureContainer.querySelector('.big-picture__img img').src = photo.url;
   bigPictureContainer.querySelector('.big-picture__img img').alt = photo.description;
