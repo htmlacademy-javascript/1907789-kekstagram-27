@@ -1,7 +1,10 @@
 import {
   isEscapeKey,
 } from './util.js';
-
+import {
+  getPhotosDescription,
+  SIMILAR_DESCRIPTION_COUNT,
+} from './data.js';
 const bigPictureContainer = document.querySelector('.big-picture');
 const commentTemplate = document.querySelector('#social__comment')
   .content
@@ -25,24 +28,32 @@ export const createBigPicture = (photo) => {
   body.classList.add('modal-open');
 };
 
+const createCommentElement = (obj) => {
+  const comment = commentTemplate.cloneNode(true);
+  comment.querySelector('.social__picture').src = obj.avatar;
+  comment.querySelector('.social__text').textContent = obj.message;
+  comment.querySelector('.social__picture').alt = obj.name;
+  return comment;
+};
+
 const updateComment = (comments) => {
   const commentFragment = document.createDocumentFragment();
   const socialComments = bigPictureContainer.querySelector('.social__comments');
   socialComments.innerHTML = '';
 
   comments.forEach((comment) => {
-    const element = commentTemplate.cloneNode(true);
-    element.querySelector('.social__picture').src = comment.avatar;
-    element.querySelector('.social__text').textContent = comment.message;
-    element.querySelector('.social__picture').alt = comment.name;
-    commentFragment.append(element);
+    const commentElement = createCommentElement(comment);
+    commentFragment.append(commentElement);
   });
-};
+  return socialComments.append(commentFragment);
 
+};
+const g = getPhotosDescription(SIMILAR_DESCRIPTION_COUNT);
+const r = g.comments;
 export const openModal = (picture) => {
   bigPictureContainer.classList.remove('hidden');
   createBigPicture(picture);
-  updateComment(picture.comments);
+  updateComment(r);
 
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
