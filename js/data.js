@@ -62,14 +62,14 @@ const createComment = (id) => ({
 // Основная функция - создает объект для массива описания фото.
 const createPhotoDescription = (id) => {
   // Создает массив комментариев
-  const сomments = Array.from({ length: [getRandomIntInclusive(1, COMMENTS_COUNT)] }, (_, commentId) => createComment(commentId + 1));
-
+  const comments = Array.from({length: getRandomIntInclusive(1, COMMENTS_COUNT)}, (_, commentId) => createComment(commentId + 1));
   return {
-    id: id,
+    id,
     url: `photos/${id}.jpg`,
+    count: comments.length,
     description: getRandomElement(DESCRIPTION),
     likes: getRandomIntInclusive(LIKES_COUNT_MIN, LIKES_COUNT_MAX),
-    сomments,
+    comments: comments,
   };
 };
 

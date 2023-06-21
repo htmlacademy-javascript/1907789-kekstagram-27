@@ -3,8 +3,8 @@ export const getRandomIntInclusive = (a, b) => {
     return NaN;
   }
 
-  const min = Math.ceil(a);
-  const max = Math.floor(b);
+  const min = Math.ceil(Math.min(a, b));
+  const max = Math.floor(Math.max(a, b));
 
   return Math.round(Math.random() * (max - min + 1)) + min;
 };
@@ -14,3 +14,5 @@ const checkStringLength = (string, maxString) => string.length <= maxString;
 checkStringLength(1,2);
 
 export const getRandomElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
+
+export const isEscapeKey = (evt) => evt.key === 'Escape';
