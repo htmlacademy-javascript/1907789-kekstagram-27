@@ -40,20 +40,19 @@ const updateComment = (comments) => {
   const commentFragment = document.createDocumentFragment();
   const socialComments = bigPictureContainer.querySelector('.social__comments');
   socialComments.innerHTML = '';
+  const commentArray = Array.from(comments);
+  commentArray.forEach((comment) => {
 
-  comments.forEach((comment) => {
     const commentElement = createCommentElement(comment);
     commentFragment.append(commentElement);
   });
   return socialComments.append(commentFragment);
 
 };
-const g = getPhotosDescription(SIMILAR_DESCRIPTION_COUNT);
-const r = g.comments;
 export const openModal = (picture) => {
   bigPictureContainer.classList.remove('hidden');
   createBigPicture(picture);
-  updateComment(r);
+  updateComment(picture.comments);
 
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {

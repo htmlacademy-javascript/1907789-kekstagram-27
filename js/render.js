@@ -16,7 +16,7 @@ const createPicture = (picture) => {
 
   element.querySelector('.picture__img').src = picture.url;
   element.querySelector('.picture__img').alt = picture.description;
-  element.querySelector('.picture__comments').textContent = picture.comments;
+  element.querySelector('.picture__comments').textContent = picture.count;
   element.querySelector('.picture__likes').textContent = picture.likes;
 
   element.addEventListener('click', () => {
